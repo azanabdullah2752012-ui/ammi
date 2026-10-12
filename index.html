@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="sacred-emerald" data-font="large">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Noor al-Tajweed — Ammi's Quran Companion</title>
+  <meta name="description" content="Tajweed Rules, Digital Tasbeeh, Daily Duas and Quran Tracker designed for Mum">
+
+  <!-- Mobile PWA Meta Tags -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0e2016">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Noor al-Tajweed">
+  <link rel="apple-touch-icon" href="icon-192.png">
+
+  <link rel="stylesheet" href="styles.css?v=5">
+</head>
+<body>
+  <div id="mobile-app-shell">
+
+    <!-- Top App Header -->
+    <header id="app-topbar">
+      <div class="topbar-brand">
+        <h1>نُورُ التَّجْوِيدِ</h1>
+        <span>Ammi's Quran Companion</span>
+      </div>
+
+      <div class="topbar-actions">
+        <!-- Text Size Scaler (A / A+) -->
+        <button class="topbar-icon-btn font-size-btn" id="btn-toggle-font" title="Adjust text size for Mum" aria-label="Toggle Font Size">
+          <span id="font-size-label">A+</span>
+        </button>
+
+        <!-- Theme Day/Night -->
+        <button class="topbar-icon-btn" id="btn-toggle-theme" title="Day/Night Color Mode" aria-label="Toggle Theme">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+        </button>
+
+        <!-- Install to Phone PWA Button -->
+        <button class="topbar-icon-btn" id="btn-open-install" title="Install on Mum's Phone" aria-label="Install App">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Scrollable App Views -->
+    <main id="main-scroll-content">
+
+      <!-- Bismillah Header Strip (Scrolls with Content) -->
+      <div class="bismillah-banner">
+        <div class="bismillah-arabic" dir="rtl">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+        <div style="font-size:0.8rem; color:var(--text-muted); margin-top:2px;">In the name of Allah, the Most Gracious, the Most Merciful</div>
+      </div>
+
+      <!-- ==================== VIEW 1: TAJWEED RULES ==================== -->
+      <section class="mobile-view active" id="view-tajweed">
+        <!-- Chapter Category Dropdown -->
+        <div style="margin-bottom:1rem;">
+          <select id="tajweed-chapter-selector" style="width:100%; padding:0.75rem 1rem; border-radius:12px; background:var(--bg-card); color:var(--text-primary); border:1px solid var(--border-gold-subtle); font-weight:700;">
+            <option value="all">All Tajweed Rules (Complete Guide)</option>
+            <option value="noon-sakinah">1. Rules of Noon Saakin & Tanween (4 Rules)</option>
+            <option value="meem-sakinah">2. Rules of Meem Saakin (3 Rules)</option>
+            <option value="qalqalah">3. Qalqalah Echo Letters (Qatb Jadd)</option>
+            <option value="madd-rules">4. Rules of Madd (Prolongation & Counts)</option>
+            <option value="special-rules">5. Heavy Letters & Quranic Stop Signs</option>
+          </select>
+        </div>
+
+        <div id="tajweed-rules-mobile-list">
+          <!-- Injected via JS -->
+        </div>
+      </section>
+
+      <!-- ==================== VIEW 2: TAJWEED PRACTICE & QUIZ ==================== -->
+      <section class="mobile-view" id="view-quiz">
+        <div class="sacred-card" style="margin-bottom:0.75rem; text-align:center;">
+          <div style="font-size:1.15rem; font-weight:800; color:var(--text-gold);">Tajweed Practice Quiz</div>
+          <div style="font-size:0.85rem; color:var(--text-muted); margin-top:2px;">
+            Gentle Tajweed Self-Check for Mum
+          </div>
+          <div style="font-size:0.95rem; font-weight:700; color:var(--text-gold); margin-top:0.4rem;" id="quiz-mobile-score">
+            Question 1 of 5 • Score: 0
+          </div>
+        </div>
+
+        <div id="quiz-mobile-container">
+          <!-- Injected via JS -->
+        </div>
+      </section>
+
+      <!-- ==================== VIEW 3: DIGITAL TASBEEH ==================== -->
+      <section class="mobile-view" id="view-tasbeeh">
+        <div class="sacred-card tasbeeh-mobile-wrapper">
+          <div class="tasbeeh-dhikr-arabic" id="tasbeeh-dhikr-arabic" dir="rtl">سُبْحَانَ اللَّهِ</div>
+          <div class="tasbeeh-dhikr-translit" id="tasbeeh-dhikr-translit">SubḥānAllāh</div>
+          <div style="font-size:0.88rem; color:var(--text-muted); margin-top:2px;" id="tasbeeh-dhikr-meaning">Glory be to Allah</div>
+
+          <!-- Circular Press Counter -->
+          <div class="tasbeeh-circle-btn" id="btn-tasbeeh-circle" role="button" aria-label="Tap to Count Dhikr">
+            <div class="tasbeeh-number-text" id="tasbeeh-number-display">0</div>
+            <div class="tasbeeh-tap-hint">TAP TO COUNT</div>
+          </div>
+
+          <div style="font-size:0.9rem; font-weight:700; color:var(--text-gold);">
+            Target: <span id="tasbeeh-target-num">33</span> • Round: <span id="tasbeeh-round-num">1</span>
+          </div>
+
+          <div style="display:flex; gap:0.75rem; margin-top:1.25rem;">
+            <button class="topbar-icon-btn font-size-btn" id="btn-tasbeeh-reset" style="padding:0 1rem;">
+              Reset Count
+            </button>
+            <button class="topbar-icon-btn font-size-btn" id="btn-tasbeeh-audio-toggle" style="padding:0 1rem;">
+              Sound: On
+            </button>
+          </div>
+        </div>
+
+        <!-- Presets Selection -->
+        <div class="sacred-card">
+          <div class="card-title-row">
+            <div>
+              <div style="font-size:1.05rem; font-weight:700; color:var(--text-gold);">Select Dhikr / Tasbeeh</div>
+              <div style="font-size:0.78rem; color:var(--text-muted);">Tap any to switch counter</div>
+            </div>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:0.6rem;" id="tasbeeh-mobile-presets">
+            <!-- Injected via JS -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== VIEW 4: DAILY DUAS ==================== -->
+      <section class="mobile-view" id="view-duas">
+        <!-- Dua Category Dropdown -->
+        <div style="margin-bottom:1rem;">
+          <select id="dua-mobile-cat-filter" style="width:100%; padding:0.75rem 1rem; border-radius:12px; background:var(--bg-card); color:var(--text-primary); border:1px solid var(--border-gold-subtle); font-weight:700;">
+            <option value="all">All Daily Duas (Everyday Needs)</option>
+            <option value="Family & Parents">1. For Parents & Family</option>
+            <option value="Daily Life & Peace">2. Ease of Affairs & Relieving Worry</option>
+            <option value="Health & Healing">3. Good Health & Complete Healing</option>
+            <option value="Quran & Learning">4. Quran Knowledge & Beneficial Learning</option>
+          </select>
+        </div>
+
+        <div id="duas-mobile-list">
+          <!-- Injected via JS -->
+        </div>
+      </section>
+
+      <!-- ==================== VIEW 5: QURAN & KHATMAH ==================== -->
+      <section class="mobile-view" id="view-quran">
+        <!-- Bookmark Card -->
+        <div class="sacred-card" style="border:1.5px solid var(--border-gold);">
+          <div class="card-title-row">
+            <div>
+              <div style="font-size:1.05rem; font-weight:700; color:var(--text-gold);">Current Quran Reading Bookmark</div>
+              <div style="font-size:0.78rem; color:var(--text-muted);">Where Mum left off reading</div>
+            </div>
+            <button class="topbar-icon-btn font-size-btn" id="btn-open-bookmark-sheet" style="padding:0 0.75rem;">
+              Edit
+            </button>
+          </div>
+          <div class="quran-ayah quran-ayah-highlight" id="quran-bookmark-surah" dir="rtl">سُورَةُ الكَهْفِ</div>
+          <div style="text-align:center; font-size:0.95rem; font-weight:700; color:var(--text-primary); margin-top:4px;" id="quran-bookmark-ayah">Ayah 1 • Juz 15</div>
+          <div style="text-align:center; font-size:0.85rem; color:var(--text-muted); margin-top:4px;" id="quran-bookmark-notes">Recited every Friday for divine light and blessing.</div>
+        </div>
+
+        <!-- 30 Juz Tracker Card -->
+        <div class="sacred-card">
+          <div class="card-title-row">
+            <div>
+              <div style="font-size:1.05rem; font-weight:700; color:var(--text-gold);">30 Juz Khatmah Tracker</div>
+              <div style="font-size:0.78rem; color:var(--text-muted);">Tap any Juz when finished to mark as read</div>
+            </div>
+            <div style="font-size:0.85rem; font-weight:700; color:var(--text-gold);" id="juz-progress-label">0% (0 / 30)</div>
+          </div>
+          <div style="height:8px; background:var(--bg-card-alt); border-radius:4px; overflow:hidden; margin-bottom:1rem;">
+            <div id="juz-progress-fill" style="width:0%; height:100%; background:var(--border-gold); transition:width 0.3s ease;"></div>
+          </div>
+          <div class="juz-mobile-grid" id="juz-mobile-grid">
+            <!-- Injected via JS -->
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Bottom App Navigation Bar (iOS / Android Style) -->
+    <nav id="app-bottom-nav" aria-label="Bottom Navigation">
+      <button class="nav-tab-btn active" data-view="tajweed">
+        <svg viewBox="0 0 24 24"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10"/><path d="M6 10h10"/></svg>
+        <span>Tajweed</span>
+      </button>
+
+      <button class="nav-tab-btn" data-view="quiz">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" x2="12.01" y1="17" y2="17"/></svg>
+        <span>Quiz</span>
+      </button>
+
+      <button class="nav-tab-btn" data-view="tasbeeh">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/></svg>
+        <span>Tasbeeh</span>
+      </button>
+
+      <button class="nav-tab-btn" data-view="duas">
+        <svg viewBox="0 0 24 24"><path d="M7 11v 6a3 3 0 0 0 6 0v-6"/><path d="M11 11v 6a3 3 0 0 0 6 0v-6"/></svg>
+        <span>Duas</span>
+      </button>
+
+      <button class="nav-tab-btn" data-view="quran">
+        <svg viewBox="0 0 24 24"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg>
+        <span>Quran</span>
+      </button>
+    </nav>
+
+  </div>
+
+  <!-- Modal: Install on Mum's Phone Sheet -->
+  <div class="modal-overlay" id="modal-install-sheet">
+    <div class="modal-bottom-sheet">
+      <div class="sheet-header">
+        <h3 class="sheet-title">Install App on Mum's Phone</h3>
+        <button class="topbar-icon-btn modal-close" aria-label="Close">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div style="font-size:0.92rem; line-height:1.6; color:var(--text-secondary);">
+        <p style="margin-bottom:0.75rem;">
+          To install <strong>Noor al-Tajweed (نور التجويد)</strong> directly on Mum's phone screen like a native app:
+        </p>
+
+        <div style="background:var(--bg-card-alt); border:1px solid var(--border-gold-subtle); border-radius:12px; padding:1rem; margin-bottom:0.85rem;">
+          <strong style="color:var(--text-gold); display:block; margin-bottom:4px;">Apple iPhone (Safari):</strong>
+          <ol style="padding-left:1.25rem; font-size:0.88rem; display:flex; flex-direction:column; gap:4px;">
+            <li>Open this link in <strong>Safari</strong> on Mum's phone.</li>
+            <li>Tap the <strong>Share</strong> button (box with an arrow pointing up at the bottom).</li>
+            <li>Scroll down and tap <strong>"Add to Home Screen"</strong>.</li>
+            <li>Tap <strong>Add</strong> in the top right. Mum will now have her own app icon on her screen!</li>
+          </ol>
+        </div>
+
+        <div style="background:var(--bg-card-alt); border:1px solid var(--border-gold-subtle); border-radius:12px; padding:1rem;">
+          <strong style="color:var(--text-gold); display:block; margin-bottom:4px;">Android (Chrome):</strong>
+          <ol style="padding-left:1.25rem; font-size:0.88rem; display:flex; flex-direction:column; gap:4px;">
+            <li>Open this link in <strong>Google Chrome</strong> on Mum's phone.</li>
+            <li>Tap the <strong>three dots (⋮)</strong> menu in the top right.</li>
+            <li>Tap <strong>"Install app"</strong> or <strong>"Add to Home Screen"</strong>.</li>
+            <li>Confirm, and the app will install on her home screen.</li>
+          </ol>
+        </div>
+      </div>
+      <button class="topbar-icon-btn font-size-btn modal-close" style="width:100%; margin-top:1.25rem; height:44px; justify-content:center;">
+        Understood (Done)
+      </button>
+    </div>
+  </div>
+
+  <!-- Modal: Bookmark Sheet -->
+  <div class="modal-overlay" id="modal-bookmark-sheet">
+    <div class="modal-bottom-sheet">
+      <div class="sheet-header">
+        <h3 class="sheet-title">Update Reading Bookmark</h3>
+        <button class="topbar-icon-btn modal-close" aria-label="Close">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <form id="form-mobile-bookmark" style="display:flex; flex-direction:column; gap:0.85rem;">
+        <div>
+          <label style="font-size:0.82rem; font-weight:700; color:var(--text-muted); display:block; margin-bottom:4px;">Surah Name</label>
+          <input type="text" id="bm-input-surah" style="width:100%; padding:0.75rem; border-radius:10px; background:var(--bg-card-alt); border:1px solid var(--border-gold-subtle); color:var(--text-primary);" placeholder="e.g. Surah Al-Kahf (سُورَةُ الكَهْفِ)" required>
+        </div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem;">
+          <div>
+            <label style="font-size:0.82rem; font-weight:700; color:var(--text-muted); display:block; margin-bottom:4px;">Ayah Number</label>
+            <input type="number" id="bm-input-ayah" style="width:100%; padding:0.75rem; border-radius:10px; background:var(--bg-card-alt); border:1px solid var(--border-gold-subtle); color:var(--text-primary);" placeholder="1" required>
+          </div>
+          <div>
+            <label style="font-size:0.82rem; font-weight:700; color:var(--text-muted); display:block; margin-bottom:4px;">Juz Number (1-30)</label>
+            <input type="number" id="bm-input-juz" style="width:100%; padding:0.75rem; border-radius:10px; background:var(--bg-card-alt); border:1px solid var(--border-gold-subtle); color:var(--text-primary);" placeholder="15" min="1" max="30">
+          </div>
+        </div>
+        <div>
+          <label style="font-size:0.82rem; font-weight:700; color:var(--text-muted); display:block; margin-bottom:4px;">Notes / Reflection</label>
+          <input type="text" id="bm-input-notes" style="width:100%; padding:0.75rem; border-radius:10px; background:var(--bg-card-alt); border:1px solid var(--border-gold-subtle); color:var(--text-primary);" placeholder="e.g. Read every Friday morning">
+        </div>
+        <button type="submit" class="topbar-icon-btn font-size-btn" style="width:100%; height:46px; justify-content:center; background:var(--border-gold); color:#0c1c14; font-weight:800; margin-top:0.5rem;">
+          Save Bookmark
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <div id="toast-container" aria-live="polite"></div>
+
+  <script src="tajweed-data.js?v=5"></script>
+  <script src="app.js?v=5"></script>
+</body>
+</html>

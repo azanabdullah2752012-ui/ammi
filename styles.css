@@ -1,0 +1,724 @@
+/* Noor al-Tajweed (نور التجويد) — Mobile-First Sacred Quranic & Tajweed Companion */
+/* Strictly Anti-Slop Compliant: Dignified, zero emojis, authentic Arabic typography, bottom app navigation */
+
+:root {
+  /* Default Sacred Emerald Theme */
+  --bg-app: #102419;
+  --bg-shell: #0c1c14;
+  --bg-card: #153022;
+  --bg-card-alt: #1a3c2b;
+  --bg-surface: #173626;
+
+  --border-gold: #c29b38;
+  --border-gold-subtle: rgba(194, 155, 56, 0.28);
+  --border-subtle: rgba(255, 255, 255, 0.08);
+
+  --text-primary: #fcf9f2;
+  --text-secondary: #c9d6ce;
+  --text-muted: #8fa597;
+  --text-gold: #e2ba55;
+
+  --tajweed-madd: #e54d42;
+  --tajweed-madd-bg: rgba(229, 77, 66, 0.15);
+  --tajweed-ikhfa: #38a169;
+  --tajweed-ikhfa-bg: rgba(56, 161, 105, 0.15);
+  --tajweed-idgham: #9f7aea;
+  --tajweed-idgham-bg: rgba(159, 122, 234, 0.15);
+  --tajweed-iqlab: #dd6b20;
+  --tajweed-iqlab-bg: rgba(221, 107, 32, 0.15);
+  --tajweed-izhar: #4299e1;
+  --tajweed-izhar-bg: rgba(66, 153, 225, 0.15);
+  --tajweed-qalqalah: #319795;
+  --tajweed-qalqalah-bg: rgba(49, 151, 149, 0.15);
+
+  --font-base: 16px;
+  --font-arabic-scale: 1.6;
+  --line-height-base: 1.6;
+  --line-height-arabic: 2.2;
+
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  --font-arabic: 'Traditional Arabic', 'Scheherazade New', 'Amiri', 'KFGQPC Uthmanic Script HAFS', serif;
+
+  --bottom-nav-height: 64px;
+  --app-max-width: 500px;
+}
+
+/* Light Parchment Mode */
+[data-theme="light-parchment"] {
+  --bg-app: #f4efe6;
+  --bg-shell: #ede6d8;
+  --bg-card: #ffffff;
+  --bg-card-alt: #fbf8f2;
+  --bg-surface: #ffffff;
+
+  --border-gold: #b38827;
+  --border-gold-subtle: rgba(179, 136, 39, 0.35);
+  --border-subtle: rgba(0, 0, 0, 0.08);
+
+  --text-primary: #1a2920;
+  --text-secondary: #3b4d42;
+  --text-muted: #64756b;
+  --text-gold: #9c741e;
+
+  --tajweed-madd-bg: #fff5f5;
+  --tajweed-ikhfa-bg: #f0fff4;
+  --tajweed-idgham-bg: #faf5ff;
+  --tajweed-iqlab-bg: #fffaf0;
+  --tajweed-izhar-bg: #ebf8ff;
+  --tajweed-qalqalah-bg: #e6fffa;
+}
+
+/* Text Size Scaling for Mum */
+[data-font="large"] {
+  --font-base: 18px;
+  --font-arabic-scale: 1.75;
+}
+[data-font="xlarge"] {
+  --font-base: 21px;
+  --font-arabic-scale: 2.05;
+}
+
+/* Global Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: var(--font-base);
+  line-height: var(--line-height-base);
+  font-family: var(--font-sans);
+  background-color: var(--bg-shell);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  background-color: var(--bg-shell);
+  color: var(--text-primary);
+}
+
+:focus-visible {
+  outline: 2px solid var(--border-gold);
+  outline-offset: 2px;
+}
+
+button, input, select, textarea {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+/* Mobile-Centric Device Container (Strict 100dvh App Shell) */
+#mobile-app-shell {
+  width: 100%;
+  max-width: var(--app-max-width);
+  height: 100dvh;
+  height: 100vh;
+  background-color: var(--bg-app);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.35);
+  border-left: 1px solid var(--border-gold-subtle);
+  border-right: 1px solid var(--border-gold-subtle);
+}
+
+/* Top App Header */
+#app-topbar {
+  flex-shrink: 0;
+  width: 100%;
+  z-index: 40;
+  background-color: var(--bg-app);
+  border-bottom: 1px solid var(--border-gold-subtle);
+  backdrop-filter: blur(8px);
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.topbar-brand {
+  display: flex;
+  flex-direction: column;
+}
+
+.topbar-brand h1 {
+  font-family: var(--font-arabic);
+  font-size: 1.35rem;
+  color: var(--text-gold);
+  line-height: 1.3;
+  direction: rtl;
+  font-weight: 700;
+}
+
+.topbar-brand span {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.topbar-icon-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-gold-subtle);
+  color: var(--text-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+}
+
+.topbar-icon-btn:hover {
+  border-color: var(--border-gold);
+}
+
+.font-size-btn {
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 0 0.5rem;
+  width: auto;
+  height: 36px;
+}
+
+/* Bismillah Strip */
+.bismillah-banner {
+  text-align: center;
+  padding: 1.15rem 1rem 0.5rem;
+}
+
+.bismillah-arabic {
+  font-family: var(--font-arabic);
+  font-size: calc(var(--font-base) * 1.55);
+  color: var(--text-gold);
+  direction: rtl;
+  line-height: var(--line-height-arabic);
+  letter-spacing: 0;
+  user-select: none;
+}
+
+/* Scrollable View Area (Bounded Between Top and Bottom Bar) */
+#main-scroll-content {
+  flex: 1 1 0%;
+  min-height: 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 0.75rem 1rem 3.5rem;
+}
+
+.mobile-view {
+  display: none;
+}
+
+.mobile-view.active {
+  display: block;
+}
+
+/* Sacred Card Silhouettes */
+.sacred-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-gold-subtle);
+  border-radius: 14px;
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.card-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.85rem;
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 0.5rem;
+}
+
+.card-title-arabic {
+  font-family: var(--font-arabic);
+  font-size: 1.35rem;
+  color: var(--text-gold);
+  direction: rtl;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.card-title-english {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* Arabic Text Typography */
+.quran-ayah {
+  font-family: var(--font-arabic);
+  direction: rtl;
+  font-size: calc(var(--font-base) * var(--font-arabic-scale));
+  line-height: var(--line-height-arabic);
+  text-align: center;
+  color: var(--text-primary);
+  padding: 0.65rem 0.25rem;
+  word-spacing: 3px;
+}
+
+.quran-ayah-highlight {
+  color: var(--text-gold);
+  font-weight: 700;
+}
+
+.urdu-translation {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  direction: rtl;
+  text-align: right;
+  margin-top: 0.35rem;
+}
+
+.english-translation {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-top: 0.35rem;
+}
+
+/* Tajweed Rule Specific Cards */
+.tajweed-rule-box {
+  background-color: var(--bg-card-alt);
+  border: 1px solid var(--border-gold-subtle);
+  border-radius: 12px;
+  padding: 1.15rem;
+  margin-bottom: 0.85rem;
+}
+
+.rule-header-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.rule-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 6px;
+  text-transform: uppercase;
+}
+
+.rule-badge.izhar { background-color: var(--tajweed-izhar-bg); color: var(--tajweed-izhar); border: 1px solid var(--tajweed-izhar); }
+.rule-badge.idgham { background-color: var(--tajweed-idgham-bg); color: var(--tajweed-idgham); border: 1px solid var(--tajweed-idgham); }
+.rule-badge.iqlab { background-color: var(--tajweed-iqlab-bg); color: var(--tajweed-iqlab); border: 1px solid var(--tajweed-iqlab); }
+.rule-badge.ikhfa { background-color: var(--tajweed-ikhfa-bg); color: var(--tajweed-ikhfa); border: 1px solid var(--tajweed-ikhfa); }
+.rule-badge.qalqalah { background-color: var(--tajweed-qalqalah-bg); color: var(--tajweed-qalqalah); border: 1px solid var(--tajweed-qalqalah); }
+.rule-badge.madd { background-color: var(--tajweed-madd-bg); color: var(--tajweed-madd); border: 1px solid var(--tajweed-madd); }
+
+.letters-cluster {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  margin: 0.6rem 0;
+  direction: rtl;
+}
+
+.letter-pill {
+  font-family: var(--font-arabic);
+  font-size: 1.3rem;
+  padding: 0.15rem 0.65rem;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-gold-subtle);
+  color: var(--text-gold);
+  border-radius: 8px;
+  line-height: 1.35;
+}
+
+/* Example Box */
+.quran-example-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  padding: 0.85rem;
+  margin-top: 0.65rem;
+  text-align: center;
+}
+
+.example-reference {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 0.25rem;
+}
+
+/* Mobile Tasbeeh Section */
+.tasbeeh-mobile-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 1rem 0;
+}
+
+.tasbeeh-dhikr-arabic {
+  font-family: var(--font-arabic);
+  font-size: calc(var(--font-base) * 1.85);
+  color: var(--text-gold);
+  line-height: var(--line-height-arabic);
+  direction: rtl;
+  min-height: 85px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tasbeeh-dhikr-translit {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-top: 0.25rem;
+}
+
+.tasbeeh-circle-btn {
+  width: 210px;
+  height: 210px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--bg-card-alt) 0%, var(--bg-card) 100%);
+  border: 5px solid var(--border-gold);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.4), inset 0 0 16px rgba(194, 155, 56, 0.15);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 1.5rem 0;
+  user-select: none;
+  cursor: pointer;
+  transition: transform 0.08s ease;
+}
+
+.tasbeeh-circle-btn:active {
+  transform: scale(0.94);
+}
+
+.tasbeeh-number-text {
+  font-size: 3.8rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.tasbeeh-tap-hint {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--text-gold);
+  margin-top: 6px;
+  text-transform: uppercase;
+}
+
+/* Mobile Quiz Layout */
+.quiz-mobile-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-gold-subtle);
+  border-radius: 14px;
+  padding: 1.25rem;
+}
+
+.quiz-option-pill {
+  width: 100%;
+  padding: 0.95rem 1rem;
+  border-radius: 10px;
+  background-color: var(--bg-card-alt);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-align: left;
+  margin-bottom: 0.65rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.15s ease;
+}
+
+.quiz-option-pill:active {
+  border-color: var(--border-gold);
+}
+
+.quiz-option-pill.correct {
+  background-color: var(--tajweed-ikhfa-bg);
+  border-color: var(--tajweed-ikhfa);
+  color: var(--tajweed-ikhfa);
+}
+
+.quiz-option-pill.wrong {
+  background-color: var(--tajweed-madd-bg);
+  border-color: var(--tajweed-madd);
+  color: var(--tajweed-madd);
+}
+
+/* 30 Juz Grid */
+.juz-mobile-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.65rem;
+}
+
+.juz-mini-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-gold-subtle);
+  border-radius: 10px;
+  padding: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.juz-mini-card.done {
+  border-color: var(--border-gold);
+  background-color: var(--bg-card-alt);
+}
+
+.juz-arabic-name {
+  font-family: var(--font-arabic);
+  font-size: 1.15rem;
+  color: var(--text-gold);
+  line-height: 1.3;
+}
+
+.juz-check-mark {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border-gold-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  color: var(--text-gold);
+}
+
+.juz-mini-card.done .juz-check-mark {
+  background-color: var(--border-gold);
+  color: #0c1c14;
+  font-weight: 800;
+}
+
+/* Bottom App Navigation Bar (In-Flow Flex-Pinned to Shell Bottom) */
+#app-bottom-nav {
+  flex-shrink: 0;
+  width: 100%;
+  height: calc(var(--bottom-nav-height) + env(safe-area-inset-bottom, 0px));
+  background-color: var(--bg-shell);
+  border-top: 1px solid var(--border-gold-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  z-index: 50;
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+.nav-tab-btn {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  color: var(--text-muted);
+  transition: color 0.15s ease;
+}
+
+.nav-tab-btn svg {
+  width: 22px;
+  height: 22px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.8;
+}
+
+.nav-tab-btn span {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.nav-tab-btn.active {
+  color: var(--text-gold);
+}
+
+.nav-tab-btn.active svg {
+  stroke: var(--text-gold);
+}
+
+/* Modals */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(4px);
+  z-index: 100;
+  display: none;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.modal-overlay.active {
+  display: flex;
+}
+
+.modal-bottom-sheet {
+  width: 100%;
+  max-width: var(--app-max-width);
+  background-color: var(--bg-card);
+  border-top: 2px solid var(--border-gold);
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  padding: 1.5rem;
+  max-height: 85vh;
+  overflow-y: auto;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.sheet-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+}
+
+.sheet-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-gold);
+}
+
+/* Toast */
+#toast-container {
+  position: fixed;
+  bottom: calc(var(--bottom-nav-height) + 12px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 2rem);
+  max-width: calc(var(--app-max-width) - 2rem);
+  z-index: 110;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.toast {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-gold);
+  color: var(--text-primary);
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-align: center;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+/* Modern Letter Badges */
+.letter-badge-group {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  margin: 0.4rem 0;
+}
+
+.letter-badge {
+  font-family: var(--font-arabic);
+  font-size: 1.25rem;
+  padding: 0.15rem 0.65rem;
+  background-color: var(--bg-card-alt);
+  border: 1px solid var(--border-gold-subtle);
+  color: var(--text-gold);
+  border-radius: 8px;
+  line-height: 1.4;
+  display: inline-block;
+}
+
+/* Transliteration Text */
+.quran-ayah-translit {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-gold);
+  margin-top: 4px;
+  direction: ltr;
+  text-align: center;
+}
+
+/* 30 Juz Grid Chips */
+.juz-chip {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-gold-subtle);
+  border-radius: 10px;
+  padding: 0.75rem 0.65rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  user-select: none;
+}
+
+.juz-chip:active {
+  transform: scale(0.97);
+}
+
+.juz-chip.completed {
+  border-color: var(--border-gold);
+  background-color: var(--bg-card-alt);
+  box-shadow: inset 0 0 10px rgba(194, 155, 56, 0.15);
+}
+
+.juz-chip-number {
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--text-gold);
+}
+
+.juz-chip-name {
+  font-family: var(--font-arabic);
+  font-size: 1.2rem;
+  color: var(--text-primary);
+  line-height: 1.5;
+  margin: 2px 0;
+}
+
+.juz-chip.completed .juz-chip-name {
+  color: var(--text-gold);
+}
+
