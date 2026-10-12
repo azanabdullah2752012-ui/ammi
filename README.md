@@ -5,28 +5,28 @@ A mobile-first, installable Progressive Web App (PWA) designed for Mum. Built wi
 
 ---
 
-## How to Open the App
+## Live App URL
 
-The application is running locally on your network:
+👉 **[https://azanabdullah2752012-ui.github.io/ammi/](https://azanabdullah2752012-ui.github.io/ammi/)**
 
-- **On your computer:** [http://localhost:8080](http://localhost:8080)
-- **On Mum's phone (connected to home Wi-Fi):** `http://192.168.0.6:8080` (or `http://Azans-MacBook-Air-2.local:8080`)
+- **GitHub Repository:** [https://github.com/azanabdullah2752012-ui/ammi](https://github.com/azanabdullah2752012-ui/ammi)
+- **Local offline fallback:** `http://localhost:8080` (or `http://Azans-MacBook-Air-2.local:8080`)
 
 ---
 
-## How to Install Directly onto Mum's Phone
+## How to Install Standalone App onto Mum's Phone
 
-1. **On iPhone (Safari):**
-   - Open `http://192.168.0.6:8080` (or `http://Azans-MacBook-Air-2.local:8080`) in Safari.
+1. **On Android (Google Chrome):**
+   - Open **`https://azanabdullah2752012-ui.github.io/ammi/`** in Google Chrome.
+   - Tap the **three dots menu (⋮)** in the top right, or tap the banner at the bottom.
+   - Tap **"Install app"**.
+   - Because it is hosted on HTTPS, Android will automatically build and install the native standalone WebAPK with zero browser address bar!
+
+2. **On iPhone (Safari):**
+   - Open **`https://azanabdullah2752012-ui.github.io/ammi/`** in Safari.
    - Tap the **Share** button (the square with an arrow pointing upward at the bottom).
    - Scroll down and tap **"Add to Home Screen"**.
    - Tap **Add** in the top right corner. Mum will now have her own app icon on her home screen.
-
-2. **On Android (Google Chrome):**
-   - Open `http://192.168.0.6:8080` (or `http://Azans-MacBook-Air-2.local:8080`) in Google Chrome.
-   - Tap the **menu button (three dots ⋮)** in the top right.
-   - Tap **"Install app"** or **"Add to Home screen"**.
-   - Confirm to add it to her home screen.
 
 ---
 
